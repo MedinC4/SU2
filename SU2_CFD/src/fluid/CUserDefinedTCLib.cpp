@@ -1082,7 +1082,6 @@ void CUserDefinedTCLib::DiffusionCoeffWBE(){
         denom += MolarFracWBE[jSpecies]/Dij(iSpecies,jSpecies);
       }
     }
-
     if (nSpecies==1) DiffusionCoeff[0] = 0;
     else DiffusionCoeff[iSpecies] = (1-MolarFracWBE[iSpecies])/denom;
   }    

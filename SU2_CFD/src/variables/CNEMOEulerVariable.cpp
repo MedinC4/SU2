@@ -95,6 +95,7 @@ CNEMOEulerVariable::CNEMOEulerVariable(su2double val_pressure,
   /*--- Always allocate the slope limiter,
    and the auxiliar variables (check the logic - JST with 2nd order Turb model - ) ---*/
   Limiter.resize(nPoint,nVar) = su2double(0.0);
+  Limiter_Primitive.resize(nPoint,nPrimVarGrad) = su2double(0.0);
 
   Solution_Max.resize(nPoint,nVar) = su2double(0.0);
   Solution_Min.resize(nPoint,nVar) = su2double(0.0);
@@ -131,7 +132,9 @@ CNEMOEulerVariable::CNEMOEulerVariable(su2double val_pressure,
 
   /* Non-physical point (first-order) initialization. */
   Non_Physical.resize(nPoint) = false;
+  Non_Physical_Counter.resize(nPoint) = 0;
 
+  /* Under-relaxation parameter. */
   LocalCFL.resize(nPoint) = su2double(0.0);
 
   /*--- Loop over all points --*/
