@@ -40,10 +40,10 @@ CNEMOEulerVariable::CNEMOEulerVariable(su2double val_pressure,
                                        unsigned long nvarprimgrad,
                                        CConfig *config,
                                        CNEMOGas *fluidmodel) : CVariable(npoint,
-                                                                    ndim,
-                                                                    nvar,
-                                                                    config   ),
-                                      Gradient_Reconstruction(config->GetReconstructionGradientRequired() ? Gradient_Aux : Gradient) {
+                                                                         ndim,
+                                                                         nvar,
+                                                                         config ),
+                                       Gradient_Reconstruction(config->GetReconstructionGradientRequired() ? Gradient_Aux : Gradient_Primitive) {
  
   vector<su2double> energies; 
   unsigned short iDim, iSpecies;
@@ -385,7 +385,7 @@ bool CNEMOEulerVariable::CheckNonPhys(su2double *U, su2double *V,
 
   if (V[A_INDEX] < 0.0 ) nonPhys = true;
 
-// Determine other properties of the mixture at the current state  
+  // Determine other properties of the mixture at the current state  
   fluidmodel->SetTDStateRhosTTv(rhos, V[T_INDEX], V[TVE_INDEX]);
   vector<su2double> eves = fluidmodel->GetSpeciesEve(V[TVE_INDEX]); 
 
