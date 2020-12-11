@@ -149,7 +149,7 @@ CNEMOEulerVariable::CNEMOEulerVariable(su2double val_pressure,
 
     /*--- Compute necessary quantities ---*/
     rho = fluidmodel->GetDensity();
-    soundspeed = fluidmodel->GetSoundSpeed();
+    soundspeed = fluidmodel->ComputeSoundSpeed();
     for (iDim = 0; iDim < nDim; iDim++){
       sqvel += val_mach[iDim]*soundspeed * val_mach[iDim]*soundspeed;
     }
@@ -387,7 +387,7 @@ bool CNEMOEulerVariable::CheckNonPhys(su2double *U, su2double *V,
 
   // Determine other properties of the mixture at the current state  
   fluidmodel->SetTDStateRhosTTv(rhos, V[T_INDEX], V[TVE_INDEX]);
-  vector<su2double> eves = fluidmodel->GetSpeciesEve(V[TVE_INDEX]); 
+  vector<su2double> eves = fluidmodel->ComputeSpeciesEve(V[TVE_INDEX]); 
 
   for (iSpecies = 0; iSpecies < nSpecies; iSpecies++)
     val_eves[iSpecies]  = eves[iSpecies];
